@@ -4,54 +4,68 @@
 
 
 📖 Introduction
+
 This project aims to cluster the video content available on Netflix based on the company’s site data. Apart from aiding in the development of an efficient recommendation system, clustering the video content would also provide information about the type of content the company is interested in listing on its site. Thus giving an insight to content creators and filmmakers on the type of video content in demand.
 
-📖 EDA Observations
-The notable observations identified during EDA were:
+📖 Problem Statement 
 
-Most movies streaming on the platform were released after 2010. A large portion of the TV Shows streaming on the platform was released after 2015. The year 2017 had the highest number of movie and TV show releases on the platform. Netflix began adding videos to the platform in 2008 and started aggressively adding video content in 2017.
-It was also found that more stand-alone movies were added as compared to TV shows. The majority of the content is rated for Mature Audiences and for audiences over 14 years old.
-Drama is the most produced genre in the top non-English speaking countries with exception of Japan and South Korea. Japan is the biggest producer of Anime across the platform which is also the leading genre in Japan. Romance is the most produced genre in South Korea.
-It is noted that Comedy was the most produced genre in English-speaking countries like the United States of America, the United Kingdom and Canada. Documentaries are predominantly produced in the United Kingdom and the United States of America
-Duplicates of TV shows were made corresponding to their seasons. Upon doing so, it was observed that the TV shows signed have been higher than the movies in 2016
-Although, the movies signed have been higher than TV shows ever since it was prominent that the TV shows signed per year were catching up to the movies signed annually. Hence, we can conclude that it was true that Netflix had been showing more interest in TV shows as compared to movies
-📖 Feature Engineering
-Upon Text Preprocessing, unigram and bigram word clouds of different genre descriptions on Netflix were created to get insight on content plots.
-These textual attributes were vectorised using TFIDF to be processed effectively.
-It was decided that the textual attributes are to be used to model video content into topics using Latent Dirichlet Allocation.
-This would make sure that all the topical information about video content was captured without putting any available information to waste.
-Apart from this, it also entertained the possibility of a video exhibiting multiple themes at different extents by expressing the probability a document belongs to a given topic.
-The highest coherence score was achieved by modelling nine topics.
-📖 Evaluation Metrics
-Silhouette Score: It displays a measure of how close each point in a cluster is to points in the neighbouring clusters.
+The goal of this project is to find similarity within groups of people to build a movie recommendation system for users. We are going to analyze a dataset from the Netflix database to explore the characteristics that people share in movies. We have experienced it ourselves or have been in the room, the endless scrolling of selecting what to watch. Users spend more time deciding what to watch than watching their movie.
 
-Calinski-Harabasz Index: Defined as the ratio between the within-cluster dispersion and the between-cluster dispersion. The higher the index, the better the performance.
+📖 Data Summery
 
-Davies-Bouldin Index: Defined as the average similarity measure of each cluster with its own cluster. The similarity is the ratio of within-cluster distances to between-cluster distances. Closer to zero, the better.
+This dataset consists of tv shows and movies available on Netflix as of 2019. The dataset is collected from Fixable which is a third-party Netflix search engine. In 2018, they released an interesting report which shows that the number of TV shows on Netflix has nearly tripled since 2010. The streaming service’s number of movies has decreased by more than 2,000 titles since 2010, while its number of TV shows has nearly tripled. It will be interesting to explore what all other insights can be obtained from the same dataset. Integrating this dataset with other external datasets such as IMDB ratings, rotten tomatoes can also provide many interesting findings.
 
-📖 ML Models Trained and Evaluated
-DBSCAN
-K-Means
-Hierarchical
-📖 Results
-The performance of three unsupervised machine learning algorithms, namely DBSCAN, K-means and Hierarchical Clustering was evaluated and compared to cluster Netflix movies and TV shows.
+show_id : Unique ID for every Movie / Tv Show
 
-DBSCAN clustered the content into 9 clusters with a silhouette score of 0.4664, Davies-Bouldin Index of 1.62 and Calinski-Harabasz Score of 2510.76.
+type : Identifier - A Movie or TV Show 
 
-For K-Means clustering the elbow and optimal silhouette score were found at 8 clusters with a silhouette score of 0.4686, Davies-Bouldin Index of 0.887 and Calinski-Harabasz Score of 2901.84.
+title : Title of the Movie / Tv Show
 
-For Hierarchical clustering, the dendrogram distance was optimal at a distance of 20 with eight clusters producing a silhouette score of 0.46867 Davies-Bouldin Index of 0.889 and Calinski-Harabasz score of 2900.28.
+director : Director of the Movie
 
-📖 Conclusions
-In conclusion, a comprehensive exploratory data analysis was performed, and the content trends produced across different countries were studied.
-It was found that it was true that Netflix had been showing more focus on TV shows as compared to movies.
-Apart from this, the video content on Netflix’s catalogue was clustered into eight clusters with a silhouette score of 0.47 with K-mean and Hierarchical Clustering Algorithms.
-This labelled content can be further studied and explored to determine what type of content is on-demand, potentially providing an intuition to content creators about the type of content Netflix is interested in listing on its catalogue.
-📖 References
-DBSCAN Clustering Algorithm in Machine Learning | KDNuggets
-Evaluate Topic Models: Latent Dirichlet Allocation (LDA) | by Shashank Kapadia | Towards Data Science.
-Agglomerative Clustering and Dendrograms — Explained | by Satyam Kumar | Towards Data Science.
-Understanding Topic Coherence Measures | by João Pedro | Towards Data Science
-Hierarchical Clustering: Agglomerative and Divisive — Explained |by Satyam Kumar| Towards Data Science|
-📋 Execution Instruction
-The given IPython Notebook can be either downloaded to be run locally on Jupyter Notebook or on Google Colab via browser.
+cast : Actors involved in the movie / show
+
+country : Country where the movie / show was produced
+
+date_added : Date it was added on Netflix
+
+release_year : Actual Release Year of the movie / show
+
+rating : TV Rating of the movie / show
+
+duration : Total Duration - in minutes or number of seasons
+
+listed_in : Genere
+
+description: The Summary description
+
+Exploring Solutions:
+
+Having a deeper understanding of what problem we are trying to solve, what the users’ needs, and frustrations are, and what the goals are for achieving the best possible solution for both for the business as well as the user, I began by listing out the possible solutions that were arrived from the research.
+
+Improve rating system: Use the star rating rather than a thumbs up and thumbs down rating system to help guide in decision making when selecting a film.
+
+Separate recently watched: Hide the movies and TV-Shows on a separate page so users don’t have to scroll through those already seen. — users have to do more searching
+Randomize a Movie: When users are unsure of what to choose, Netflix will randomly select something to watch based on their viewing history.
+
+Show popular/trending films: Create a category which showcases only trending content.
+
+Connect with Friends: It was proven that users watch shows and movies based on friend recommendations so this may be useful for keeping users locked into Netflix for longer.
+
+Organizing films by the mood: Alongside the genres filter, it may be possible to organize content based on the mood that is experienced after watching the film.
+Steps involved:
+
+The full code for this article can be found here. It is implemented in Python and different clustering algorithms are used. Below is a brief description of the general approach that I employed:
+
+Data cleaning and pre-processing: Here I checked and dealt with missing and duplicate variables from the data set as these can grossly affect the performance of different machine learning algorithms (many algorithms do not tolerate missing data).
+
+#Exploratory Data Analysis: Here I wanted to gain important statistical insights from the data and the things that I checked for were the distributions of the different attributes, correlations of the attributes with each other and the target variable and I calculated important odds and proportions for the categorical attributes.
+
+#Clustering: Clustering or cluster analysis is a machine learning technique, which groups the unlabelled dataset. It can be defined as "A way of grouping the data points into different clusters, consisting of similar data points. The objects with the possible similarities remain in a group that has less or no similarities with another group." It does it by finding some similar patterns in the unlabelled dataset such as shape, size, colour, behaviour, etc., and divides them as per the presence and absence of those similar patterns. It is an unsupervised learning method; hence no supervision is provided to the algorithm, and it deals with the unlabeled dataset. After applying this clustering technique, each cluster or group is provided with a cluster-ID. ML systems can use this id to simplify the processing of large and complex datasets.
+
+
+#Conclusion 
+In conclusion, tailored recommendations can be made based on information about movies and TV shows. In addition, similar models can be developed to provide valuable recommendations to consumers in other domains. It will solve for improved movie and TV-Show selection times with a considerable growth in satisfaction of the content being consumed leading to more user engagement and greater trust in Netflix recommendations.
+
+
+-----------------------------------------------------
